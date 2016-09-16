@@ -44,3 +44,6 @@ test
 
 # Temporary Files
 tmp
+
+# GFM Preview
+.README.md.html
