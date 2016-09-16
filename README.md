@@ -17,14 +17,13 @@ npm install css-datauri --save-dev
 ##### Async
 
 ```js
-var cssDataURIEncode = require('../lib/css-datauri').encode;
-cssDataURIEncode('src.css', 'dest.css', (err, content) => {
-	console.log("Complete!");
-}, {
+var CSSDataURI = require('../lib/css-datauri');
+(new CSSDataURI({
 	// In- or exclude files via glob patterns:
 	include: ['**/*']
+})).encode('src.css', 'dest.css', (err, content) => {
+	console.log("Complete!");
 });
-
 ```
 
 ##### Sync
