@@ -98,12 +98,12 @@ export default class CSSDataURI {
    	return null;
   }
 
-  static sync(src, dest) {
+  static sync(src, dest, options) {
     let content = (new CSSDataURI(options)).encodeSync(src, dest);
     return content;
   }
   
-  static encode(src, dest, callback) {
+  static encode(src, dest, callback, options) {
     (new CSSDataURI(options)).encode(src, dest, callback);
   }
   
