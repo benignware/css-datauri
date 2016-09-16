@@ -97,15 +97,6 @@ export default class CSSDataURI {
    	// Error loading file
    	return null;
   }
-  
-  static promise(src, dest, options) {
-    const datauri = new DataURI();
-    return new Promise((resolve, reject) => {
-      datauri.on('encoded', resolve)
-        .on('error', reject)
-        .encode(src, dest, options);
-    });
-  }
 
   static sync(src, dest) {
     let content = (new CSSDataURI(options)).encodeSync(src, dest);
