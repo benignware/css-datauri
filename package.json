@@ -16,7 +16,9 @@
   "engines": {
     "node": ">= 0.10"
   },
-  "keywords": [],
+  "keywords": [
+    "css", "assets", "data-url", "base64"
+  ],
   "author": "Rafael Nowrotek",
   "license": "MIT",
   "devDependencies": {
