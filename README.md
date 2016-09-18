@@ -12,7 +12,9 @@ npm install css-datauri --save-dev
 
 ## Usage
 
-#### Default Options
+#### Basic Example
+
+Convert assets to data-urls in css-files
 
 ##### Async
 
@@ -29,7 +31,9 @@ var cssDataURISync = require('css-datauri').sync;
 cssDataURISync('test/fixtures/test.css', 'tmp/default_options');
 ```
 
-#### Custom Options
+#### Custom Example
+
+Filter assets by glob pattern relative to current working dir
 
 ##### Async
 
@@ -51,10 +55,10 @@ cssDataURISync('test/fixtures/test.css', 'tmp/custom_options', {
 ```
 
 
-## Options
+##  Options
 
 #### options.filter
 Type: `Array`
 Default value: `['**/*']`
 
-Filter assets by glob pattern relative to current working dir.
+Filter assets by glob pattern relative to current working dir
