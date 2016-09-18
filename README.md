@@ -36,7 +36,7 @@ cssDataURISync('test/fixtures/test.css', 'tmp/default_options');
 ```js
 var CSSDataURI = require('css-datauri');
 (new CSSDataURI({
-	filter: ['**/*', '!**/*.png']
+	filter: ['test/fixtures/fonts/**/*']
 })).encode('test/fixtures/test.css', 'tmp/custom_options', (err, data) => {
 	// Done
 });
@@ -46,7 +46,7 @@ var CSSDataURI = require('css-datauri');
 ```js
 var cssDataURISync = require('css-datauri').sync;
 cssDataURISync('test/fixtures/test.css', 'tmp/custom_options', {
-	filter: ['**/*', '!**/*.png']
+	filter: ['test/fixtures/fonts/**/*']
 });
 ```
 
@@ -57,4 +57,4 @@ cssDataURISync('test/fixtures/test.css', 'tmp/custom_options', {
 Type: `Array`
 Default value: `['**/*']`
 
-In- or exclude assets by providing an array containing glob patterns
+Filter assets by glob pattern relative to current working dir.

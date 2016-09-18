@@ -1,4 +1,4 @@
-import {dirname, resolve, extname} from 'path';
+import {dirname, resolve, extname, relative} from 'path';
 import fs from 'fs';
 import parseCSS from 'css-parse';
 import stringifyCSS from 'css-stringify';
@@ -25,7 +25,7 @@ export default class CSSDataURI {
   	let match;
   	let assets = {};
   	let matches = [];
-  	const getFilename = (url) => url && resolve(dir, url.split("?")[0].split("#")[0]);
+  	const getFilename = (url) => url && relative(process.cwd(), resolve(dir, url.split("?")[0].split("#")[0]));
   	
   	// Collect pattern matches
   	while (match = PATTERN.exec(data)) {
