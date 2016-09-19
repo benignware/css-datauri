@@ -17,9 +17,9 @@ export default class CSSDataURI {
   	}, options);
   }
 
-  _encodeAssets(data, src, callback) {
-  	var dir = dirname(src);
-  	let async = false;
+  _encodeAssets(data, base = '.', callback) {
+  	// Get asset directory
+  	let dir = fs.lstatSync(base).isDirectory() ? base : dirname(base);
   	
   	var count = 0;
   	let match;
@@ -68,13 +68,13 @@ export default class CSSDataURI {
   	}
   }
   
-  _encodeData(data, src, callback) {
+  _encodeData(data, base = '.', callback) {
   	let replace = (data, assets) => {
 	  	return data.replace(PATTERN, (matched, url, index) => {
 			return assets[url] && `url(${assets[url].data})` || matched;
 		});
 	};
-  	let assets = this._encodeAssets(data, src, callback ? (err, assets) => {
+  	let assets = this._encodeAssets(data, base, callback ? (err, assets) => {
   		var content = replace(data, assets);
   		callback(err, content);
   	} : undefined);
