@@ -31,6 +31,29 @@ var cssDataURISync = require('css-datauri').sync;
 cssDataURISync('test/fixtures/test.css', 'tmp/default_options');
 ```
 
+##### Events
+
+```js
+var CSSDataURI = require('css-datauri');
+(new CSSDataURI())
+	.on('success', (content) => {
+		// Done
+	})
+	.on('error', err => { throw(err); })
+	.encode('test/fixtures/test.css', 'tmp/default_options');
+```
+
+##### Promise
+
+```js
+var cssDataURIPromise = require('../lib/css-datauri').promise;
+cssDataURIPromise('test/fixtures/test.css', 'tmp/default_options')
+	.then((content) => {
+		// Done
+	}).catch(err => { throw(err); });
+
+```
+
 #### Custom Example
 
 Filter assets by glob pattern relative to current working dir

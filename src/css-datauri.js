@@ -6,18 +6,21 @@ import DataURI from 'datauri';
 import { sync as datauriSync } from 'datauri';
 import multimatch from 'multimatch';
 import mkdirp from 'mkdirp';
+import EventEmitter from 'events';
 
 const PATTERN = /url\s*\(['"]*([^\'"]+)['"]*\)/gmi;
 
-export default class CSSDataURI {
-
+export default class CSSDataURI extends EventEmitter {
+  
   constructor(options = {}) {
+  	super();
   	this.options = Object.assign({
   		filter: ['**/*']
   	}, options);
   }
 
   _encodeAssets(data, base = '.', callback) {
+  	console.log("encode assets: ", base);
   	// Get asset directory
   	let dir = fs.lstatSync(base).isDirectory() ? base : dirname(base);
   	
@@ -54,7 +57,7 @@ export default class CSSDataURI {
 				}
 				if (count === Object.keys(assets).length) {
 					// Complete
-					callback(asset.error, assets);
+					callback && callback(asset.error, assets);
 				}
 			});
 		} else {
@@ -81,37 +84,54 @@ export default class CSSDataURI {
 	return assets ? replace(data, assets) : null;
   }
   
-  encode(src, dest, callback) {
+  _handleComplete(err, content, callback) {
+  	  callback && callback(err, content); 
+	  err ? this.emit('error', err) : this.emit('success', content);
+	  this.emit('complete', err, content);
+  }
+  
+  encode(src, dest, callback = () => {}) {
 	fs.readFile(src, "utf8", (err, data) => {
 		if (err) {
-			callback(err, null);
+			this._handleComplete(err, null, callback);
 			return;
 		}
   		this._encodeData(data, src, (err, content) => {
 			if (err) {
-				callback(err, null);
+				this._handleComplete(err, null, callback);
 				return;
 			}
 			mkdirp.sync(dirname(dest));
 			fs.writeFile(dest, content, "utf-8", (err) => {
-			  callback(err, content);
+			  this._handleComplete(err, content, callback);
 			});
 		});
   	});
+  	return this;
   }
   
   encodeSync(src, dest) {
   	let data = fs.readFileSync(src, "utf8");
+  	let content = null;
    	if (data) {
-   		var content = this._encodeData(data, src);
+   		content = this._encodeData(data, src);
    		if (content) {
    			mkdirp.sync(dirname(dest));
    			fs.writeFileSync(dest, content, "utf-8");
-   			return content;
    		}
    	}
-   	// Error loading file
+   	this._handleComplete(!content && new Error('An error occurred when encoding'), content);
    	return null;
+  }
+  
+  static promise(src, dest, options) {
+    const instance = new CSSDataURI(options);
+    return new Promise((resolve, reject) => {
+      instance.on('complete', resolve)
+      	.encode(src, dest)
+        .on('error', reject)
+        .on('success', resolve)
+    });
   }
 
   static sync(src, dest, options) {
