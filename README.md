@@ -12,7 +12,7 @@ npm install css-datauri --save-dev
 
 ## Usage
 
-#### Basic Example
+### Basic Example
 
 Convert assets to data-urls in css-files
 
@@ -54,7 +54,7 @@ cssDataURIPromise('test/fixtures/test.css', 'tmp/default_options')
 
 ```
 
-#### Custom Example
+### Custom Example
 
 Filter assets by glob pattern relative to current working dir
 
