@@ -39,9 +39,6 @@ jspm_packages
 # Eclipse
 .project
 
-# Mocha
-test
-
 # Temporary Files
 tmp
 

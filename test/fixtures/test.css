@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'Kindergarten';
+    src:  url('fonts/kindergarten/Kindergarten.woff') format('woff'),
+    url('fonts/kindergarten/Kindergarten.svg#Kindergarten') format('svg'),
+    url('fonts/kindergarten/Kindergarten.eot');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.color-bars {
+  background: url('images/200px-SMPTE_Color_Bars.svg.png');
+}
+
+.spinner {
+  background: url('images/ajax-loader.gif');
+}
