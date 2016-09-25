@@ -1,6 +1,9 @@
 {
   "name": "css-datauri",
   "version": "0.0.1",
+  "bin": {
+  	"css-datauri": "./index.js"
+  },
   "scripts": {
     "clean": "rm -rf lib",
     "build-datauri": "babel --plugins add-module-exports src/css-datauri.js --presets es2015-node4 --out-file lib/css-datauri.js",
@@ -17,7 +20,10 @@
     "node": ">= 0.10"
   },
   "keywords": [
-    "css", "assets", "data-url", "base64"
+    "css",
+    "assets",
+    "data-url",
+    "base64"
   ],
   "author": "Rafael Nowrotek",
   "license": "MIT",
@@ -34,6 +40,7 @@
     "mocha": "^3.0.2"
   },
   "dependencies": {
+    "commander": "^2.9.0",
     "css-parse": "^2.0.0",
     "css-stringify": "^2.0.0",
     "datauri": "^1.0.4",

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import {dirname, resolve, extname, relative} from 'path';
 import fs from 'fs';
 import parseCSS from 'css-parse';
@@ -20,10 +22,9 @@ export default class CSSDataURI extends EventEmitter {
   }
 
   _encodeAssets(data, base = '.', callback) {
-  	console.log("encode assets: ", base);
   	// Get asset directory
   	let dir = fs.lstatSync(base).isDirectory() ? base : dirname(base);
-  	
+  	let options = this.options;
   	var count = 0;
   	let match;
   	let assets = {};
@@ -34,12 +35,13 @@ export default class CSSDataURI extends EventEmitter {
   	while (match = PATTERN.exec(data)) {
   		matches.push(match);
   	}
+   let filter = typeof options.filter === 'string' ? options.filter.split(/\s*,\s*/) : options.filter;
   	// Filter assets
   	matches.forEach( (match) => {
   		var
 			url = match[1],
 			file = getFilename(url);
-		if ( !assets[url] && multimatch( [file], this.options.filter ).length ) {
+		if ( !assets[url] && multimatch( [file], filter ).length ) {
 			assets[url] = {
 				file: file
 			};
@@ -125,12 +127,11 @@ export default class CSSDataURI extends EventEmitter {
   }
   
   static promise(src, dest, options) {
-    const instance = new CSSDataURI(options);
     return new Promise((resolve, reject) => {
-      instance.on('complete', resolve)
-      	.encode(src, dest)
+      (new CSSDataURI(options))
         .on('error', reject)
         .on('success', resolve)
+        .encode(src, dest)
     });
   }
 
