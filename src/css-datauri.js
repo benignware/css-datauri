@@ -47,6 +47,7 @@ export default class CSSDataURI extends EventEmitter {
 			};
 		}
 	});
+	
   	// Load assets
 	Object.keys(assets).forEach( (url) => {
 		let asset = assets[url];
@@ -66,6 +67,11 @@ export default class CSSDataURI extends EventEmitter {
 			asset.data = datauriSync(asset.file);
 		}
 	});
+	
+	// Immediately execute callback if no assets have been found
+	if (!Object.keys(assets).length) {
+		callback && callback(null, {});
+	}
 	
 	// In sync mode, immediately return result
   	if (!callback) {
