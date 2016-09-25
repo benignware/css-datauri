@@ -78,6 +78,26 @@ cssDataURISync('test/fixtures/test.css', 'tmp/custom_options', {
 ```
 
 
+### CLI
+
+Install `css-datauri` globally:
+```
+npm install css-datauri -g
+```
+
+Run `--help` to show usage information:
+
+```cli
+Usage: css-datauri [options] <src> <dest>
+
+  Options:
+
+    -h, --help           output usage information
+    -V, --version        output the version number
+    -f, --filter [name]  Filter assets by glob pattern
+```
+
+
 ##  Options
 
 #### options.filter
