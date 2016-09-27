@@ -11,6 +11,7 @@ program
     .version('0.0.1')
     .arguments('<src> <dest>')
     .option('-f, --filter [name]', 'Filter assets by glob pattern')
+    .option('-b, --base [name]', 'Specify asset path')
     .action(function(src, dest, program) {
     	CSSDataURI.promise(program.args[0], program.args[1], (function (program) {
     		// Get cli options

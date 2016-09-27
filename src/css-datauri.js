@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import {dirname, resolve, extname, relative} from 'path';
 import fs from 'fs';
 import parseCSS from 'css-parse';
@@ -12,35 +10,42 @@ import EventEmitter from 'events';
 
 const PATTERN = /url\s*\(['"]*([^\'"]+)['"]*\)/gmi;
 
+const GET_FILE = (url, base) => url && relative(process.cwd(), resolve(base, url.split("?")[0].split("#")[0]));
+
 export default class CSSDataURI extends EventEmitter {
   
   constructor(options = {}) {
   	super();
   	this.options = Object.assign({
-  		filter: ['**/*']
+  		filter: ['**/*'],
+  		base: 'auto'
   	}, options);
   }
 
   _encodeAssets(data, base = '.', callback) {
-  	// Get asset directory
-  	let dir = fs.lstatSync(base).isDirectory() ? base : dirname(base);
-  	let options = this.options;
-  	var count = 0;
+  	
   	let match;
   	let assets = {};
   	let matches = [];
-  	const getFilename = (url) => url && relative(process.cwd(), resolve(dir, url.split("?")[0].split("#")[0]));
+  	let options = this.options;
+  	
+  	// Get asset directory
+  	base = options.base !== 'auto' && options.base || base;
+  	base = fs.lstatSync(base).isDirectory() ? base : dirname(base);
+  	
+  	var count = 0;
   	
   	// Collect pattern matches
   	while (match = PATTERN.exec(data)) {
   		matches.push(match);
-  	}
-   let filter = typeof options.filter === 'string' ? options.filter.split(/\s*,\s*/) : options.filter;
+    }
+    let filter = typeof options.filter === 'string' ? options.filter.split(/\s*,\s*/) : options.filter;
+    
   	// Filter assets
   	matches.forEach( (match) => {
   		var
 			url = match[1],
-			file = getFilename(url);
+			file = GET_FILE(url, base);
 		if ( !assets[url] && multimatch( [file], filter ).length ) {
 			assets[url] = {
 				file: file

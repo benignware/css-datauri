@@ -56,7 +56,7 @@ cssDataURIPromise('test/fixtures/test.css', 'tmp/default_options')
 
 ### Custom Example
 
-Filter assets by glob pattern relative to current working dir
+Filter assets by glob pattern
 
 ##### Async
 
@@ -95,6 +95,7 @@ Usage: css-datauri [options] <src> <dest>
     -h, --help           output usage information
     -V, --version        output the version number
     -f, --filter [name]  Filter assets by glob pattern
+    -b, --base [name]    Set path to asset directory
 ```
 
 
@@ -104,4 +105,10 @@ Usage: css-datauri [options] <src> <dest>
 Type: `Array`
 Default value: `['**/*']`
 
-Filter assets by glob pattern relative to current working dir
+Filter assets by glob pattern
+
+#### options.base
+Type: `String`
+Default value: `auto`
+
+Set path to asset directory. If not specified, it's determined from source file.
