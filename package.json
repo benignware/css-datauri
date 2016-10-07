@@ -1,6 +1,8 @@
 {
   "name": "css-datauri",
   "version": "0.0.1",
+  "author": "Rafael Nowrotek",
+  "license": "MIT",
   "bin": {
   	"css-datauri": "./index.js"
   },
@@ -25,8 +27,6 @@
     "data-url",
     "base64"
   ],
-  "author": "Rafael Nowrotek",
-  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.1.2",
     "babel-core": "^6.1.2",
