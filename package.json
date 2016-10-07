@@ -1,7 +1,10 @@
 {
   "name": "css-datauri",
   "version": "0.0.1",
-  "author": "Rafael Nowrotek",
+  "author": {
+  	"name": "Rafael Nowrotek",
+  	"url": "http://benignware.com"
+  },
   "license": "MIT",
   "bin": {
   	"css-datauri": "./index.js"
@@ -44,7 +47,6 @@
     "css-parse": "^2.0.0",
     "css-stringify": "^2.0.0",
     "datauri": "^1.0.4",
-    "deepmerge": "^0.2.10",
     "mkdirp": "^0.5.1",
     "multimatch": "^2.1.0"
   }
