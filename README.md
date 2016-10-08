@@ -1,6 +1,6 @@
 # css-datauri
 
-> Embed assets in css files
+Embed assets in css files
 
 ## Install
 
