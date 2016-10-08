@@ -1,5 +1,4 @@
-css-datauri
-===========
+# css-datauri
 
 > Embed assets in css files
 
