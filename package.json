@@ -1,6 +1,6 @@
 {
   "name": "css-datauri",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
   	"name": "Rafael Nowrotek",
   	"url": "http://benignware.com"
@@ -9,6 +9,7 @@
   "bin": {
   	"css-datauri": "./index.js"
   },
+  "main": "./lib/css-datauri",
   "scripts": {
     "clean": "rm -rf lib",
     "build-datauri": "babel --plugins add-module-exports src/css-datauri.js --presets es2015-node4 --out-file lib/css-datauri.js",
